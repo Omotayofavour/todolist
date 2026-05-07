@@ -1,206 +1,344 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Outreach Tracker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      padding: 15px;
-      margin: 0;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    h2 {
-      margin-bottom: 10px;
-      font-size: 20px;
+    body{
+      font-family:Arial,sans-serif;
+      background:#f4f7fb;
+      padding:20px;
+      color:#111;
     }
 
-    .card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      margin-bottom: 15px;
+    .container{
+      max-width:1400px;
+      margin:auto;
     }
 
-    .controls, .inputs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+      flex-wrap:wrap;
+      gap:15px;
     }
 
-    input, select, button {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ddd;
-      font-size: 14px;
-      flex: 1;
-      min-width: 120px;
+    .topbar h1{
+      font-size:32px;
     }
 
-    button {
-      background: #111;
-      color: white;
-      cursor: pointer;
-      flex: 1;
-    }
-
-    button:hover {
-      background: #333;
-    }
-
-    .delete-btn {
-      background: #ff4d4d;
-      border: none;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .delete-btn:hover {
-      background: #cc0000;
-    }
-
-    .table-container {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border-radius: 10px;
-      min-width: 700px;
-    }
-
-    th {
-      background: #111;
-      color: white;
-      text-align: left;
-    }
-
-    td, th {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
-    }
-
-    tr:hover {
-      background: #f9f9f9;
+    .topbar p{
+      color:#666;
+      margin-top:5px;
     }
 
     .stats{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:15px;
-      margin-bottom:20px;
+      margin-bottom:25px;
     }
 
     .stat-card{
       background:white;
-      padding:20px;
-      border-radius:12px;
-      text-align:center;
-      box-shadow:0 4px 10px rgba(0,0,0,0.05);
+      padding:25px;
+      border-radius:18px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.05);
     }
 
     .stat-card h3{
-      margin:0 0 10px;
-      font-size:16px;
-      color:#555;
+      font-size:15px;
+      color:#666;
+      margin-bottom:10px;
     }
 
     .stat-card p{
-      margin:0;
-      font-size:30px;
+      font-size:35px;
       font-weight:bold;
-      color:#111;
     }
 
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 18px;
-      }
-
-      input, select, button {
-        font-size: 13px;
-        padding: 8px;
-      }
-
-      table {
-        font-size: 13px;
-      }
+    .card{
+      background:white;
+      padding:20px;
+      border-radius:18px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom:20px;
     }
+
+    .inputs{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+    }
+
+    input,
+    select,
+    button{
+      padding:14px;
+      border-radius:12px;
+      border:1px solid #ddd;
+      font-size:14px;
+      outline:none;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:#111;
+    }
+
+    .btns{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:15px;
+    }
+
+    button{
+      background:#111;
+      color:white;
+      cursor:pointer;
+      border:none;
+      transition:0.3s;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      opacity:0.9;
+    }
+
+    .download-btn{
+      background:#16a34a;
+    }
+
+    .delete-btn{
+      background:#ef4444;
+      padding:10px 14px;
+      border-radius:10px;
+    }
+
+    .filters{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .filters input{
+      flex:1;
+      min-width:250px;
+    }
+
+    .filters select{
+      width:220px;
+    }
+
+    .table-container{
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:1000px;
+    }
+
+    th{
+      background:#111;
+      color:white;
+      padding:15px;
+      text-align:left;
+    }
+
+    td{
+      padding:15px;
+      border-bottom:1px solid #eee;
+    }
+
+    tr:hover{
+      background:#fafafa;
+    }
+
+    input[type="checkbox"]{
+      transform:scale(1.3);
+      cursor:pointer;
+    }
+
+    .status-select{
+      min-width:130px;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:30px;
+      color:#777;
+      font-size:14px;
+    }
+
+    @media(max-width:700px){
+
+      body{
+        padding:12px;
+      }
+
+      .topbar h1{
+        font-size:24px;
+      }
+
+      .stat-card p{
+        font-size:28px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
-<h2>📊 Outreach Tracker</h2>
+<div class="container">
 
-<!-- ANALYTICS -->
-<div class="stats">
+  <!-- TOP -->
+  <div class="topbar">
 
-  <div class="stat-card">
-    <h3>Total Companies</h3>
-    <p id="totalCompanies">0</p>
+    <div>
+      <h1>📊 Outreach Tracker</h1>
+      <p>Track leads, conversions and business outreach</p>
+    </div>
+
   </div>
 
-  <div class="stat-card">
-    <h3>Reached Out</h3>
-    <p id="reachedOut">0</p>
+  <!-- STATS -->
+  <div class="stats">
+
+    <div class="stat-card">
+      <h3>Total Companies</h3>
+      <p id="totalCompanies">0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Reached Out</h3>
+      <p id="reachedOut">0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Interested</h3>
+      <p id="interested">0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Converted</h3>
+      <p id="converted">0</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Failed</h3>
+      <p id="failed">0</p>
+    </div>
+
   </div>
 
-  <div class="stat-card">
-    <h3>Interested</h3>
-    <p id="interested">0</p>
+  <!-- ADD COMPANY -->
+  <div class="card">
+
+    <div class="inputs">
+
+      <input
+      id="category"
+      placeholder="Category (Clinic, Hotel, Salon...)">
+
+      <input
+      id="company"
+      placeholder="Company Name">
+
+      <input
+      id="issue"
+      placeholder="Website Issue">
+
+    </div>
+
+    <div class="btns">
+
+      <button onclick="addData()">
+        <i class="fa-solid fa-plus"></i>
+        Add Company
+      </button>
+
+      <button
+      class="download-btn"
+      onclick="exportData()">
+
+        <i class="fa-solid fa-file-excel"></i>
+        Download Excel
+
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="stat-card">
-    <h3>Converted</h3>
-    <p id="converted">0</p>
+  <!-- FILTER -->
+  <div class="card">
+
+    <div class="filters">
+
+      <input
+      id="search"
+      placeholder="🔍 Search company..."
+      onkeyup="renderTable()">
+
+      <select
+      id="filter"
+      onchange="renderTable()">
+
+        <option value="All">
+          All Categories
+        </option>
+
+      </select>
+
+    </div>
+
   </div>
 
-  <div class="stat-card">
-    <h3>Failed</h3>
-    <p id="failed">0</p>
+  <!-- TABLE -->
+  <div class="card table-container">
+
+    <table id="table">
+
+      <tr>
+        <th>#</th>
+        <th>Category</th>
+        <th>Company</th>
+        <th>Issue</th>
+        <th>Reached Out</th>
+        <th>Interested</th>
+        <th>Result</th>
+        <th>Action</th>
+      </tr>
+
+    </table>
+
   </div>
 
-</div>
+  <div class="footer">
+    Built for personal outreach management 🚀
+  </div>
 
-<div class="card inputs">
-  <input id="category" placeholder="Category">
-  <input id="company" placeholder="Company Name">
-  <input id="issue" placeholder="Website Issue">
-</div>
-
-<div class="card controls">
-  <button onclick="addData()">Add</button>
-  <button onclick="exportData()">Download Excel</button>
-</div>
-
-<div class="card controls">
-  <input id="search" placeholder="🔍 Search..." onkeyup="renderTable()">
-
-  <select id="filter" onchange="renderTable()">
-    <option value="All">All Categories</option>
-  </select>
-</div>
-
-<div class="table-container">
-  <table id="table">
-    <tr>
-      <th>#</th>
-      <th>Category</th>
-      <th>Company</th>
-      <th>Issue</th>
-      <th>Status</th>
-      <th>Action</th>
-    </tr>
-  </table>
 </div>
 
 <!-- FIREBASE -->
@@ -209,14 +347,15 @@
 
 <script>
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
+
   apiKey: "AIzaSyAT9sZW42HDkbrEOlGoivgGEtWqSQlCorI",
   authDomain: "outreach-tracker-c326c.firebaseapp.com",
   projectId: "outreach-tracker-c326c",
   storageBucket: "outreach-tracker-c326c.firebasestorage.app",
   messagingSenderId: "187476749037",
   appId: "1:187476749037:web:b445c1c711b406fbe87ae4"
+
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -225,16 +364,18 @@ const db = firebase.firestore();
 
 let data = [];
 
-/* LOAD */
+/* REALTIME LOAD */
 db.collection("clients").onSnapshot(snapshot => {
 
   data = [];
 
   snapshot.forEach(doc => {
+
     data.push({
       id: doc.id,
       ...doc.data()
     });
+
   });
 
   updateCategories();
@@ -244,29 +385,43 @@ db.collection("clients").onSnapshot(snapshot => {
 });
 
 /* ADD */
-function addData() {
+function addData(){
 
-  let category = document.getElementById("category").value.trim();
-  let company = document.getElementById("company").value.trim();
-  let issue = document.getElementById("issue").value.trim();
+  let category =
+  document.getElementById("category")
+  .value.trim();
 
-  if (!company) {
-    return alert("Company required");
+  let company =
+  document.getElementById("company")
+  .value.trim();
+
+  let issue =
+  document.getElementById("issue")
+  .value.trim();
+
+  if(!company){
+    return alert("Company name required");
   }
 
   let exists = data.some(
-    d => d.company.toLowerCase() === company.toLowerCase()
+    d => d.company.toLowerCase()
+    === company.toLowerCase()
   );
 
-  if (exists) {
-    return alert("⚠️ Duplicate company!");
+  if(exists){
+    return alert("⚠️ Duplicate company");
   }
 
   db.collection("clients").add({
+
     category,
     company,
     issue,
-    status: "Not Contacted"
+
+    reachedOut:false,
+    interested:false,
+    result:"Pending"
+
   });
 
   document.getElementById("category").value = "";
@@ -276,45 +431,64 @@ function addData() {
 }
 
 /* DELETE */
-function deleteEntry(id) {
+function deleteEntry(id){
 
-  let confirmDelete = confirm(
-    "Are you sure you want to delete this entry?"
-  );
+  let confirmDelete =
+  confirm("Delete this company?");
 
-  if (confirmDelete) {
-    db.collection("clients").doc(id).delete();
+  if(confirmDelete){
+
+    db.collection("clients")
+    .doc(id)
+    .delete();
+
   }
 
 }
 
-/* RENDER */
-function renderTable() {
+/* TABLE */
+function renderTable(){
 
-  let table = document.getElementById("table");
+  let table =
+  document.getElementById("table");
 
   table.innerHTML = `
+
     <tr>
       <th>#</th>
       <th>Category</th>
       <th>Company</th>
       <th>Issue</th>
-      <th>Status</th>
+      <th>Reached Out</th>
+      <th>Interested</th>
+      <th>Result</th>
       <th>Action</th>
     </tr>
+
   `;
 
-  let filter = document.getElementById("filter").value;
-  let search = document.getElementById("search").value.toLowerCase();
+  let filter =
+  document.getElementById("filter").value;
+
+  let search =
+  document.getElementById("search")
+  .value.toLowerCase();
 
   let count = 1;
 
   data.forEach(item => {
 
-    if (
-      (filter === "All" || item.category === filter) &&
-      item.company.toLowerCase().includes(search)
-    ) {
+    if(
+
+      (filter === "All" ||
+      item.category === filter)
+
+      &&
+
+      item.company.toLowerCase()
+      .includes(search)
+
+    ){
 
       let row = table.insertRow();
 
@@ -323,49 +497,121 @@ function renderTable() {
       row.insertCell(2).innerText = item.company;
       row.insertCell(3).innerText = item.issue;
 
-      /* STATUS */
-      let statusCell = row.insertCell(4);
+      /* REACHED OUT */
+      let reachedCell =
+      row.insertCell(4);
 
-      let select = document.createElement("select");
+      let reachedCheckbox =
+      document.createElement("input");
 
-      [
-        "Not Contacted",
-        "Reached Out",
-        "Interested",
-        "Converted",
-        "Failed"
-      ].forEach(s => {
+      reachedCheckbox.type = "checkbox";
 
-        let option = document.createElement("option");
-        option.text = s;
+      reachedCheckbox.checked =
+      item.reachedOut || false;
 
-        select.add(option);
-
-      });
-
-      select.value = item.status;
-
-      select.onchange = () => {
+      reachedCheckbox.onchange = () => {
 
         db.collection("clients")
-          .doc(item.id)
-          .update({
-            status: select.value
-          });
+        .doc(item.id)
+        .update({
+
+          reachedOut:
+          reachedCheckbox.checked
+
+        });
 
       };
 
-      statusCell.appendChild(select);
+      reachedCell.appendChild(
+      reachedCheckbox);
+
+      /* INTERESTED */
+      let interestedCell =
+      row.insertCell(5);
+
+      let interestedCheckbox =
+      document.createElement("input");
+
+      interestedCheckbox.type = "checkbox";
+
+      interestedCheckbox.checked =
+      item.interested || false;
+
+      interestedCheckbox.onchange = () => {
+
+        db.collection("clients")
+        .doc(item.id)
+        .update({
+
+          interested:
+          interestedCheckbox.checked
+
+        });
+
+      };
+
+      interestedCell.appendChild(
+      interestedCheckbox);
+
+      /* RESULT */
+      let resultCell =
+      row.insertCell(6);
+
+      let resultSelect =
+      document.createElement("select");
+
+      resultSelect.className =
+      "status-select";
+
+      [
+        "Pending",
+        "Converted",
+        "Failed"
+      ].forEach(r => {
+
+        let option =
+        document.createElement("option");
+
+        option.text = r;
+
+        resultSelect.add(option);
+
+      });
+
+      resultSelect.value =
+      item.result || "Pending";
+
+      resultSelect.onchange = () => {
+
+        db.collection("clients")
+        .doc(item.id)
+        .update({
+
+          result:
+          resultSelect.value
+
+        });
+
+      };
+
+      resultCell.appendChild(
+      resultSelect);
 
       /* DELETE */
-      let actionCell = row.insertCell(5);
+      let actionCell =
+      row.insertCell(7);
 
-      let btn = document.createElement("button");
+      let btn =
+      document.createElement("button");
 
-      btn.innerText = "Delete";
-      btn.className = "delete-btn";
+      btn.innerHTML =
+      `<i class="fa-solid fa-trash"></i>`;
 
-      btn.onclick = () => deleteEntry(item.id);
+      btn.className =
+      "delete-btn";
+
+      btn.onclick = () =>
+      deleteEntry(item.id);
 
       actionCell.appendChild(btn);
 
@@ -376,26 +622,33 @@ function renderTable() {
 }
 
 /* FILTER */
-function updateCategories() {
+function updateCategories(){
 
-  let filter = document.getElementById("filter");
+  let filter =
+  document.getElementById("filter");
 
   let existing = new Set();
 
   filter.innerHTML = `
-    <option value="All">All Categories</option>
+    <option value="All">
+      All Categories
+    </option>
   `;
 
   data.forEach(item => {
 
-    if (!existing.has(item.category)) {
+    if(!existing.has(item.category)){
 
       existing.add(item.category);
 
-      let option = document.createElement("option");
+      let option =
+      document.createElement("option");
 
-      option.value = item.category;
-      option.text = item.category;
+      option.value =
+      item.category;
+
+      option.text =
+      item.category;
 
       filter.appendChild(option);
 
@@ -406,74 +659,126 @@ function updateCategories() {
 }
 
 /* ANALYTICS */
-function updateAnalytics() {
+function updateAnalytics(){
 
-  document.getElementById("totalCompanies").innerText =
-    data.length;
+  document.getElementById(
+  "totalCompanies").innerText =
+  data.length;
 
-  document.getElementById("reachedOut").innerText =
-    data.filter(d => d.status === "Reached Out").length;
+  document.getElementById(
+  "reachedOut").innerText =
 
-  document.getElementById("interested").innerText =
-    data.filter(d => d.status === "Interested").length;
+  data.filter(
+  d => d.reachedOut).length;
 
-  document.getElementById("converted").innerText =
-    data.filter(d => d.status === "Converted").length;
+  document.getElementById(
+  "interested").innerText =
 
-  document.getElementById("failed").innerText =
-    data.filter(d => d.status === "Failed").length;
+  data.filter(
+  d => d.interested).length;
+
+  document.getElementById(
+  "converted").innerText =
+
+  data.filter(
+  d => d.result === "Converted"
+  ).length;
+
+  document.getElementById(
+  "failed").innerText =
+
+  data.filter(
+  d => d.result === "Failed"
+  ).length;
 
 }
 
-/* EXPORT */
-function exportData() {
+/* EXPORT CSV */
+function exportData(){
 
-  let filter = document.getElementById("filter").value;
+  let filter =
+  document.getElementById("filter")
+  .value;
 
-  let search = document.getElementById("search")
-    .value
-    .toLowerCase();
+  let search =
+  document.getElementById("search")
+  .value.toLowerCase();
 
-  let rows = [
-    ["S/N","Category","Company","Issue","Status"]
-  ];
+  let rows = [[
+
+    "S/N",
+    "Category",
+    "Company",
+    "Issue",
+    "Reached Out",
+    "Interested",
+    "Result"
+
+  ]];
 
   let count = 1;
 
   data.forEach(item => {
 
-    if (
-      (filter === "All" || item.category === filter) &&
-      item.company.toLowerCase().includes(search)
-    ) {
+    if(
+
+      (filter === "All" ||
+      item.category === filter)
+
+      &&
+
+      item.company.toLowerCase()
+      .includes(search)
+
+    ){
 
       rows.push([
+
         count++,
         item.category,
         item.company,
         item.issue,
-        item.status
+
+        item.reachedOut
+        ? "Yes"
+        : "No",
+
+        item.interested
+        ? "Yes"
+        : "No",
+
+        item.result
+
       ]);
 
     }
 
   });
 
-  let csv = rows.map(r => r.join(",")).join("\n");
+  let csv = rows
+  .map(r => r.join(","))
+  .join("\n");
 
   let blob = new Blob(
-    [csv],
-    { type: "text/csv" }
-  );
+  [csv],
+  { type:"text/csv" });
 
-  let link = document.createElement("a");
+  let link =
+  document.createElement("a");
 
-  link.href = URL.createObjectURL(blob);
+  link.href =
+  URL.createObjectURL(blob);
 
   if(filter === "All"){
-    link.download = "all_categories.csv";
+
+    link.download =
+    "all_categories.csv";
+
   } else {
-    link.download = filter + ".csv";
+
+    link.download =
+    filter + ".csv";
+
   }
 
   link.click();
